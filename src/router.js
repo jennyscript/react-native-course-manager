@@ -10,7 +10,7 @@ const RouterComponent = () =>
     <Scene key="auth">
       <Scene key="login" component={LoginForm} title="Please Login" />
     </Scene>
-    <Scene key="main" initial>
+    <Scene key="main">
       <Scene
         key="employeeList"
         component={EmployeeList}
