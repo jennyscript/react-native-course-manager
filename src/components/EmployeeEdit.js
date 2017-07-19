@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { text } from 'react-native-communications'
 
 import { Button, Card, CardSection } from '../components/common'
 import EmployeeForm from './EmployeeForm'
@@ -9,6 +10,7 @@ class EmployeeEdit extends Component {
   constructor(props) {
     super(props)
     this.onSave = this.onSave.bind(this)
+    this.onTextPress = this.onTextPress.bind(this)
   }
   componentWillMount() {
     Object.entries(this.props.employee).forEach(([prop, val]) =>
@@ -18,6 +20,10 @@ class EmployeeEdit extends Component {
     const { name, phone, shift } = this.props
     this.props.employeeSave({ name, phone, shift, uid: this.props.employee.uid })
   }
+  onTextPress() {
+    const { phone, shift } = this.props
+    text(phone, `Your upcoming shift is on ${shift}`)
+  }
   render() {
     return (
       <Card>
@@ -25,6 +31,11 @@ class EmployeeEdit extends Component {
         <CardSection>
           <Button onPress={this.onSave}>
             Save Changes
+          </Button>
+        </CardSection>
+        <CardSection>
+          <Button onPress={this.onTextPress}>
+            Text Schedule
           </Button>
         </CardSection>
       </Card>
